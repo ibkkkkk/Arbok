@@ -1,0 +1,18 @@
+{
+  "name": "arbok",
+  "version": "1.0.0",
+  "description": "arbok",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "ibkkk",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "mongoose": "^6.4.4",
+    "nodemon": "^2.0.19"
+  }
+}
