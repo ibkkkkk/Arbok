@@ -11,6 +11,7 @@ export const Header = () => {
             fontSize={{ base: "md", md: "lg" }}
             color="white"
             cursor="pointer"
+            mx={2}
           >
             Sample
           </Heading>
