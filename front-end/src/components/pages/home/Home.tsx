@@ -4,17 +4,21 @@ import { UserCard } from "../../molecules/user/UserCard";
 import { Header } from "../../organisms/layout/Header";
 import { useUsers } from "../../../customHooks/useUsers";
 import { useEffect } from "react";
+import { PostForm } from "../../organisms/layout/PostForm";
 
 export const Home = () => {
-  const { getUsers, users } = useUsers();
+  const { users, getUsers } = useUsers();
 
   useEffect(() => getUsers(), []);
 
   return (
     <>
       <Header />
+      <Box h={300} boxShadow="4px 2px 15px -9px #65789f" m={3}>
+        <PostForm />
+      </Box>
       <Box display="flex">
-        <Box flex="8">
+        <Box flex="6.5">
           {
             <Wrap p={{ base: 5, md: 9 }}>
               {users.map((user) => (
@@ -29,9 +33,7 @@ export const Home = () => {
             </Wrap>
           }
         </Box>
-        <Box flex="3">
-          <p>fvfvvvvvv</p>
-        </Box>
+        <Box flex="0.5"></Box>
       </Box>
     </>
   );

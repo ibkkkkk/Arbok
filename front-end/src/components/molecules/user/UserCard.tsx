@@ -7,11 +7,11 @@ type Props = {
   userName: string;
 };
 export const UserCard: FC<Props> = memo((props) => {
-  const { id, imgUrl, userName } = props;
+  const { imgUrl, userName } = props;
   return (
     <Box
-      w="260px"
-      h="260px"
+      w="130px"
+      h="130px"
       bg="white"
       borderRadius="10px"
       shadow="md"
@@ -20,13 +20,13 @@ export const UserCard: FC<Props> = memo((props) => {
     >
       <Stack textAlign="center">
         <Image
-          boxSize="160px"
+          boxSize="50px"
           src={imgUrl}
           borderRadius="full"
           alt={userName}
           m="auto"
         />
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize="sm" fontWeight="bold">
           {userName}
         </Text>
       </Stack>

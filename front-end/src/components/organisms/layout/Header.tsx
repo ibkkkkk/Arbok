@@ -1,6 +1,6 @@
 import React from "react";
 import { BellIcon, ChatIcon, SearchIcon } from "@chakra-ui/icons";
-import { Flex, Heading, Input, Box } from "@chakra-ui/react";
+import { Flex, Heading, Input, Image } from "@chakra-ui/react";
 export const Header = () => {
   return (
     <>
@@ -28,6 +28,14 @@ export const Header = () => {
         <Flex px={3} align="center" color="white" cursor="pointer">
           <BellIcon mx={2} />
           <ChatIcon />
+          <Image
+            src="/Pictures/panda.png"
+            alt=""
+            borderRadius="50%"
+            object-fit="cover"
+            w="50px"
+            h="50px"
+          />
         </Flex>
       </Flex>
     </>
