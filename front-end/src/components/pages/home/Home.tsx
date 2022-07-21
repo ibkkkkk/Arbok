@@ -1,40 +1,56 @@
-import { Wrap, WrapItem, Box } from "@chakra-ui/react";
+import { Box, useDisclosure, Wrap, WrapItem } from "@chakra-ui/react";
+import { FC, memo, useCallback, useEffect } from "react";
 
-import { UserCard } from "../../molecules/user/UserCard";
 import { Header } from "../../organisms/layout/Header";
+import { PostForm } from "../../molecules/user/PostForm";
+import { UserModal } from "../../molecules/user/UserModal";
+import { useSelected } from "../../../customHooks/useSelected";
+import { UserCard } from "../../molecules/user/UserCard";
 import { useUsers } from "../../../customHooks/useUsers";
-import { useEffect } from "react";
-import { PostForm } from "../../organisms/layout/PostForm";
 
-export const Home = () => {
-  const { users, getUsers } = useUsers();
+export const Home: FC = memo(() => {
+  const { getUsers, users } = useUsers();
+  const { onOpen, onClose, isOpen } = useDisclosure();
+  const { selectUser, onSelectUser } = useSelected();
 
   useEffect(() => getUsers(), []);
+
+  const onClickUser = useCallback(
+    (id: number) => {
+      onSelectUser({ id, users, onOpen });
+    },
+    [users]
+  );
 
   return (
     <>
       <Header />
-      <Box h={300} boxShadow="4px 2px 15px -9px #65789f" m={3}>
-        <PostForm />
-      </Box>
-      <Box display="flex">
-        <Box flex="6.5">
-          {
-            <Wrap p={{ base: 5, md: 9 }}>
-              {users.map((user) => (
-                <WrapItem key={user.id} mx="auto">
-                  <UserCard
-                    id={user.id}
-                    imgUrl="https://source.unsplash.com/random"
-                    userName={user.name}
-                  />
-                </WrapItem>
-              ))}
-            </Wrap>
-          }
+      <Box w="100%">
+        <Box h={285} boxShadow="4px 2px 15px -9px #65789f" m={3}>
+          <PostForm />
         </Box>
-        <Box flex="0.5"></Box>
+
+        <Box w="100%">
+          <Box>
+            {
+              <Wrap p={{ base: 5, md: 8 }}>
+                {users.map((user) => (
+                  <WrapItem key={user.id} mx="auto">
+                    <UserCard
+                      id={user.id}
+                      imgUrl="https://source.unsplash.com/random"
+                      userName={user.name}
+                      onClick={onClickUser}
+                    />
+                  </WrapItem>
+                ))}
+              </Wrap>
+            }
+          </Box>
+        </Box>
       </Box>
+
+      <UserModal isOpen={isOpen} onClose={onClose} user={selectUser} />
     </>
   );
-};
+});

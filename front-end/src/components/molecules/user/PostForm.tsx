@@ -12,46 +12,52 @@ import {
 export const PostForm = () => {
   return (
     <>
-      <Box display="flex" h={100}>
+      <Box display="flex" h={100} marginBottom={5}>
         <Image
           src="/Pictures/panda.png"
           alt="panda"
           borderRadius="50%"
-          object-fit="cover"
-          w="35px"
-          h="35px"
+          w="32px"
+          h="32px"
           m="auto"
         />
 
         <Input
           w="90%"
           placeholder="仲間を募集しよう！"
-          my={5}
           variant="unstyled"
           size="lg"
         />
       </Box>
 
-      <Box display="flex" position="relative">
-        <Select placeholder="デバイス" size="xs" w="20%" marginRight={3}>
-          <option value="option1">PS</option>
-          <option value="option2">PC</option>
-          <option value="option3">Switch</option>
-        </Select>
-        <Select placeholder="ゲームタイトル" size="xs" w="20%">
-          <option value="option1">VALORANT</option>
-          <option value="option2">APEX</option>
-          <option value="option3">FORTNITE</option>
-        </Select>
+      <Box>
         <Box display="flex">
-          <Button my={3} size="sm" position="fixed" right="300">
+          <Select placeholder="デバイス" size="xs" w="20%" marginRight={3}>
+            <option value="option1">PS</option>
+            <option value="option2">PC</option>
+            <option value="option3">Switch</option>
+          </Select>
+          <Select placeholder="ゲームタイトル" size="xs" w="20%">
+            <option value="option1">VALORANT</option>
+            <option value="option2">APEX</option>
+            <option value="option3">FORTNITE</option>
+          </Select>
+        </Box>
+        <Box display="flex" justifyContent="flex-end" mx={75}>
+          <Button
+            size="sm"
+            cursor="pointer"
+            bg="blue.200"
+            _hover={{ opacity: 0.7 }}
+            color="black.500"
+          >
             投稿
           </Button>
         </Box>
 
-        <Divider marginTop={45} />
+        <Divider marginTop={15} borderColor="blue.200" />
       </Box>
-      <Box marginTop={20} paddingLeft={4}>
+      <Box marginTop={3} paddingLeft={4}>
         <Text fontSize="sm">
           ※ 投稿内容によっては削除されることもあります。
         </Text>
