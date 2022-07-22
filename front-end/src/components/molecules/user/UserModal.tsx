@@ -2,6 +2,7 @@ import { memo, FC } from "react";
 import {
   FormControl,
   FormLabel,
+  Image,
   Input,
   Modal,
   ModalBody,
@@ -10,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { User } from "../../../types/user";
@@ -22,26 +24,42 @@ type Props = {
 export const UserModal: FC<Props> = memo((props) => {
   const { isOpen, onClose, user } = props;
   return (
-    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="md">
+    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="lg">
       <ModalOverlay>
-        <ModalContent pb={6} bg="blackAlpha.700" color="#eee" borderRadius="lg">
+        <ModalContent
+          pb={4}
+          bg="blackAlpha.700"
+          color="#eee"
+          borderRadius="lg"
+          w="100%"
+        >
           <ModalHeader textAlign="center" fontSize="xl">
-            yuikuro
+            <Image
+              src="/Pictures/hakone.png"
+              borderRadius="100%"
+              w="80px"
+              h="80px"
+              m="auto"
+              marginTop="5"
+            />
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody mx={4}>
-            <Stack spacing={4}>
+          <ModalBody mx={4} textAlign="center">
+            <Stack spacing={3}>
               <FormControl>
                 <FormLabel>ID</FormLabel>
-                <Input value={user?.username} isReadOnly />
+                <Input value="yuikuro" isReadOnly />
               </FormControl>
               <FormControl>
                 <FormLabel>タイトル</FormLabel>
-                <Input value={user?.game} isReadOnly />
+                <Input value="VALORANT" isReadOnly />
               </FormControl>
-              <FormControl>
+              <FormControl overflow="break-word">
                 <FormLabel>コメント</FormLabel>
-                <Input value={user?.email} isReadOnly boxSize="sm" />
+                <Textarea h={200} overflow="break-word">
+                  アンレート @1 VC:discord アイアン〜シルバーくらいの方
+                  初心者歓迎です！ 雑談しながら楽しくやりましょう #VALORANT募集
+                </Textarea>
               </FormControl>
             </Stack>
           </ModalBody>

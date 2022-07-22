@@ -49,7 +49,7 @@ export const PostForm = () => {
             cursor="pointer"
             bg="blue.200"
             _hover={{ opacity: 0.7 }}
-            color="black.500"
+            color="grey.100"
           >
             投稿
           </Button>

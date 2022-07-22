@@ -31,7 +31,7 @@ export const UserCard: FC<Props> = memo((props) => {
             m="auto"
           />
 
-          <Text fontSize="lg" fontWeight="bold">
+          <Text fontSize="lg" fontWeight="bold" marginTop={6}>
             {userName}
           </Text>
         </Box>

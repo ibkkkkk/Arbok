@@ -1,6 +1,7 @@
 import React from "react";
-import { BellIcon, ChatIcon, SearchIcon } from "@chakra-ui/icons";
-import { Heading, Input, Image, Box } from "@chakra-ui/react";
+import { BellIcon, ChatIcon } from "@chakra-ui/icons";
+import { Heading, Image, Box } from "@chakra-ui/react";
+import { MenuButton } from "../../atoms/MenuButton";
 export const Header = () => {
   return (
     <>
@@ -12,25 +13,18 @@ export const Header = () => {
         justifyContent="space-between"
       >
         <Box>
+          <MenuButton />
+        </Box>
+        <Box display="flex" alignItems="center">
           <Heading
             as="h1"
             fontSize={{ base: "md", md: "lg" }}
             color="white"
             cursor="pointer"
             mx={2}
-            paddingTop={0.5}
           >
             Sample
           </Heading>
-        </Box>
-        <Box display="flex" alignItems="center">
-          <SearchIcon w={6} h={4} cursor="pointer" color="white" />
-          <Input
-            placeholder="検索する"
-            h={7}
-            borderRadius="25px"
-            variant="filled"
-          />
         </Box>
         <Box
           px={3}
