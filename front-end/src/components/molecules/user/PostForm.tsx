@@ -20,6 +20,7 @@ export const PostForm = () => {
           w="32px"
           h="32px"
           m="auto"
+          objectFit="cover"
         />
 
         <Input

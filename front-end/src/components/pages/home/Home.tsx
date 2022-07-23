@@ -1,4 +1,11 @@
-import { Box, useDisclosure, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useDisclosure,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 
 import { Header } from "../../organisms/layout/Header";
@@ -32,8 +39,11 @@ export const Home: FC = memo(() => {
 
         <Box w="100%">
           <Box>
+            <Text align="center" fontWeight="bold" marginBottom={3}>
+              募集一覧
+            </Text>
             {
-              <Wrap p={{ base: 5, md: 8 }}>
+              <Wrap p={{ base: 4, md: 7 }} spacingX={4}>
                 {users.map((user) => (
                   <WrapItem key={user.id} mx="auto">
                     <UserCard

@@ -41,6 +41,7 @@ export const UserModal: FC<Props> = memo((props) => {
               h="80px"
               m="auto"
               marginTop="5"
+              objectFit="cover"
             />
           </ModalHeader>
           <ModalCloseButton />

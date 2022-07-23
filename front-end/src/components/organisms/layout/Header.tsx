@@ -44,6 +44,7 @@ export const Header = () => {
             h="20px"
             marginLeft={2}
             marginBottom={0.5}
+            objectFit="cover"
           />
         </Box>
       </Box>

@@ -1,9 +1,13 @@
 export type User = {
   id: number;
   name: string;
-  username: string;
+  userID: string;
   email: string;
+  password: string;
   device: string;
-  gameID: string;
-  game: string;
+  gameTitle: string;
+  description: string;
+  photo: string;
+  date: string;
+  like: number;
 };

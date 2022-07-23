@@ -13,13 +13,18 @@ export const UserCard: FC<Props> = memo((props) => {
   return (
     <Box
       w={200}
-      h={220}
+      h={210}
       borderRadius="5px"
       shadow="md"
+      rounded="md"
       p={3}
-      _hover={{ cursor: "pointer", opacity: 0.7 }}
+      cursor="pointer"
+      _hover={{
+        transform: "scale(.95)",
+        transition: "all .2s ease-out",
+        border: "0px",
+      }}
       onClick={() => onClick(id)}
-      bg="white.900"
     >
       <Stack textAlign="center">
         <Box>
@@ -31,8 +36,15 @@ export const UserCard: FC<Props> = memo((props) => {
             m="auto"
           />
 
-          <Text fontSize="lg" fontWeight="bold" marginTop={6}>
+          <Text
+            fontSize={{ base: "md", md: "lg" }}
+            fontWeight="bold"
+            marginTop={4}
+          >
             {userName}
+          </Text>
+          <Text fontSize="sm" margin={2}>
+            3分前
           </Text>
         </Box>
       </Stack>
