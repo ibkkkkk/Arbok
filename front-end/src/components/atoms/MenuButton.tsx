@@ -2,15 +2,15 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import { memo, FC } from "react";
 
-// type Props = {
-//   onOpen: () => void;
-// };
+type Props = {
+  onOpen: () => void;
+};
 
-export const MenuButton: FC = memo((props) => {
-  // const { onOpen } = props;
+export const MenuButton: FC<Props> = memo((props) => {
+  const { onOpen } = props;
   return (
     <IconButton
-      // onClick={onOpen}
+      onClick={onOpen}
       aria-label="menuButton"
       icon={<HamburgerIcon />}
       size="sm"

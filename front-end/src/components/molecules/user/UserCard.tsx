@@ -1,4 +1,3 @@
-import { StarIcon } from "@chakra-ui/icons";
 import { Box, Image, Stack, Text } from "@chakra-ui/react";
 import { memo, FC } from "react";
 

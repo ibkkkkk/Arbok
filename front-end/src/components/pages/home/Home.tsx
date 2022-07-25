@@ -1,11 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  useDisclosure,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Box, Text, useDisclosure, Wrap, WrapItem } from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 
 import { Header } from "../../organisms/layout/Header";
@@ -14,8 +7,10 @@ import { UserModal } from "../../molecules/user/UserModal";
 import { useSelected } from "../../../customHooks/useSelected";
 import { UserCard } from "../../molecules/user/UserCard";
 import { useUsers } from "../../../customHooks/useUsers";
+// import { Ibkkk } from "../../../Ibkkk";
+// import { Users } from "../../../dummyData";
 
-export const Home: FC = memo(() => {
+export const Home: FC = memo((user) => {
   const { getUsers, users } = useUsers();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { selectUser, onSelectUser } = useSelected();
@@ -59,7 +54,6 @@ export const Home: FC = memo(() => {
           </Box>
         </Box>
       </Box>
-
       <UserModal isOpen={isOpen} onClose={onClose} user={selectUser} />
     </>
   );

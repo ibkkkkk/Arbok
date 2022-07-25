@@ -1,8 +1,10 @@
 import React from "react";
 import { BellIcon, ChatIcon } from "@chakra-ui/icons";
-import { Heading, Image, Box } from "@chakra-ui/react";
+import { Heading, Image, Box, useDisclosure } from "@chakra-ui/react";
 import { MenuButton } from "../../atoms/MenuButton";
 export const Header = () => {
+  const { onOpen, onClose, isOpen } = useDisclosure();
+
   return (
     <>
       <Box
@@ -13,7 +15,7 @@ export const Header = () => {
         justifyContent="space-between"
       >
         <Box>
-          <MenuButton />
+          <MenuButton onOpen={onOpen} />
         </Box>
         <Box display="flex" alignItems="center">
           <Heading
