@@ -10,4 +10,5 @@ export type User = {
   photo: string;
   date: string;
   like: number;
+  post: string;
 };
