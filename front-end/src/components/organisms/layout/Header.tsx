@@ -2,9 +2,9 @@ import React from "react";
 import { BellIcon, ChatIcon } from "@chakra-ui/icons";
 import { Heading, Image, Box, useDisclosure } from "@chakra-ui/react";
 import { MenuButton } from "../../atoms/MenuButton";
+import { HeaderDrawer } from "../../molecules/user/HeaderDrawer";
 export const Header = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
-
   return (
     <>
       <Box
@@ -17,13 +17,12 @@ export const Header = () => {
         <Box>
           <MenuButton onOpen={onOpen} />
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" justifyContent="center">
           <Heading
             as="h1"
             fontSize={{ base: "md", md: "lg" }}
             color="white"
             cursor="pointer"
-            mx={2}
           >
             Sample
           </Heading>
@@ -50,6 +49,7 @@ export const Header = () => {
           />
         </Box>
       </Box>
+      <HeaderDrawer onClose={onClose} isOpen={isOpen} />
     </>
   );
 };

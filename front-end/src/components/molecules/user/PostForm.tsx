@@ -5,7 +5,6 @@ import {
   Image,
   Input,
   Select,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 

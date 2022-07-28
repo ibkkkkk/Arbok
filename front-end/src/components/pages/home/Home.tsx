@@ -32,26 +32,25 @@ export const Home: FC = memo((user) => {
           <PostForm />
         </Box>
 
-        <Box w="100%">
-          <Box>
-            <Text align="center" fontWeight="bold" marginBottom={3}>
-              募集一覧
-            </Text>
-            {
-              <Wrap p={{ base: 4, md: 7 }} spacingX={4}>
-                {users.map((user) => (
-                  <WrapItem key={user.id} mx="auto">
-                    <UserCard
-                      id={user.id}
-                      imgUrl="https://source.unsplash.com/random"
-                      userName={user.name}
-                      onClick={onClickUser}
-                    />
-                  </WrapItem>
-                ))}
-              </Wrap>
-            }
-          </Box>
+        <Text align="center" fontWeight="bold" marginBottom={3}>
+          募集一覧
+        </Text>
+
+        <Box marginLeft={1}>
+          {
+            <Wrap p={3} spacingX={4}>
+              {users.map((user) => (
+                <WrapItem key={user.id} mx="auto">
+                  <UserCard
+                    id={user.id}
+                    imgUrl="https://source.unsplash.com/random"
+                    userName={user.name}
+                    onClick={onClickUser}
+                  />
+                </WrapItem>
+              ))}
+            </Wrap>
+          }
         </Box>
       </Box>
       <UserModal isOpen={isOpen} onClose={onClose} user={selectUser} />

@@ -1,5 +1,6 @@
 import { memo, FC } from "react";
 import {
+  Box,
   FormControl,
   FormLabel,
   Image,
@@ -21,6 +22,7 @@ type Props = {
   onClose: () => void;
   user: User | null;
 };
+
 export const UserModal: FC<Props> = memo((props) => {
   const { isOpen, onClose, user } = props;
   return (
@@ -49,7 +51,7 @@ export const UserModal: FC<Props> = memo((props) => {
             <Stack spacing={3}>
               <FormControl>
                 <FormLabel>ID</FormLabel>
-                <Input value="yuikuro" isReadOnly />
+                <Input value={user?.email} isReadOnly />
               </FormControl>
               <FormControl>
                 <FormLabel>タイトル</FormLabel>
