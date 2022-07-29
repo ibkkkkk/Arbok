@@ -1,5 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import { Post } from "../../molecules/user/Post";
+import { Post } from "../../molecules/post/Post";
 
 import { HeaderWithoutProfile } from "../../organisms/layout/HeaderWithoutProfile";
 import { TimeLine } from "../../organisms/layout/TimeLine";

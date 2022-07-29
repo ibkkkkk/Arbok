@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { FC } from "react";
 
 import { Users } from "../../../dummyData";
-import { Post } from "../../molecules/user/Post";
+import { Post } from "../../molecules/post/Post";
 
 export const TimeLine = (post: any) => {
   return (

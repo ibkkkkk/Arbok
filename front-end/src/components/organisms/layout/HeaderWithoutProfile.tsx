@@ -2,7 +2,7 @@ import React, { memo, useCallback } from "react";
 import { Heading, Image, Box, Drawer, useDisclosure } from "@chakra-ui/react";
 
 import { ArrowButton } from "../../atoms/ArrowButton";
-import { FriendDrawer } from "../../molecules/user/FriendDrawer";
+import { FriendDrawer } from "../../molecules/friend/FriendDrawer";
 export const HeaderWithoutProfile = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
 

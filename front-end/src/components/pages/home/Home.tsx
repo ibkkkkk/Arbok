@@ -2,10 +2,10 @@ import { Box, Text, useDisclosure, Wrap, WrapItem } from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 
 import { Header } from "../../organisms/layout/Header";
-import { PostForm } from "../../molecules/user/PostForm";
-import { UserModal } from "../../molecules/user/UserModal";
+import { PostForm } from "../../molecules/post/PostForm";
+import { UserModal } from "../../molecules/UserModal";
 import { useSelected } from "../../../customHooks/useSelected";
-import { UserCard } from "../../molecules/user/UserCard";
+import { UserCard } from "../../molecules/UserCard";
 import { useUsers } from "../../../customHooks/useUsers";
 // import { Ibkkk } from "../../../Ibkkk";
 // import { Users } from "../../../dummyData";
