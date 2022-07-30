@@ -1,4 +1,3 @@
-import React, { memo, useCallback } from "react";
 import { Heading, Image, Box, Drawer, useDisclosure } from "@chakra-ui/react";
 
 import { ArrowButton } from "../../atoms/ArrowButton";
@@ -8,27 +7,17 @@ export const HeaderWithoutProfile = () => {
 
   return (
     <>
-      <Box
-        bg="blue.500"
-        py={2}
-        display="flex"
-        textAlign="center"
-        justifyContent="space-between"
-      >
+      <Box bg="blue.500" py={2} display="flex" alignItems="center">
         {/* <Box>
           <MenuButton onOpen={onOpen} />
         </Box> */}
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          m="auto"
-        >
+        <Box m="auto">
           <Heading
             as="h1"
             fontSize={{ base: "md", md: "lg" }}
             color="white"
             cursor="pointer"
+            paddingLeft={8}
           >
             Sample
           </Heading>

@@ -14,7 +14,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { User } from "../../types/user";
+import { User } from "../../../types/user";
 
 type Props = {
   isOpen: boolean;

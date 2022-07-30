@@ -11,13 +11,13 @@ export const Header = () => {
         bg="blue.500"
         py={2}
         display="flex"
-        textAlign="center"
+        alignItems="center"
         justifyContent="space-between"
       >
         <Box>
           <MenuButton onOpen={onOpen} />
         </Box>
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box display="flex" alignItems="center">
           <Heading
             as="h1"
             fontSize={{ base: "md", md: "lg" }}

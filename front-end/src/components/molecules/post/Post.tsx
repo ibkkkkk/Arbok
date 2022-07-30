@@ -2,12 +2,17 @@ import { DragHandleIcon } from "@chakra-ui/icons";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 
+import { Users } from "../../../dummyData";
+
 type Props = {
   post: any;
 };
 
 export const Post: FC<Props> = (props) => {
   const { post } = props;
+
+  const user = Users.filter((user) => user.id === 1);
+  console.log(user[0].userID);
   return (
     <>
       <Box
@@ -20,7 +25,7 @@ export const Post: FC<Props> = (props) => {
         <Box>
           <Box display="flex" alignItems="center" position="relative">
             <Image
-              src="/Pictures/hakone.png"
+              src={Users.filter((user) => user.id === post.id)[0].photo}
               w="38px"
               h="38px"
               borderRadius="50%"
@@ -30,16 +35,16 @@ export const Post: FC<Props> = (props) => {
               marginTop="2"
             />
             <Text marginLeft="2" marginTop="2" fontWeight="bold" fontSize="15">
-              {post.userID}
+              {Users.filter((user) => user.id === post.id)[0].userID}
             </Text>
             <Text marginLeft="4" marginTop="2" fontSize="12">
-              {post.date}
+              {Users.filter((user) => user.id === post.id)[0].date}
             </Text>
             <DragHandleIcon position="absolute" left="97%" />
           </Box>
           <Box w="90%" m="auto">
             <Text marginTop="5" marginBottom="3">
-              {post.description}
+              {Users.filter((user) => user.id === post.id)[0].description}
             </Text>
             <Image
               src="https://source.unsplash.com/random"

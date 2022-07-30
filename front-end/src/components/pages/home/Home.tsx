@@ -3,9 +3,9 @@ import { FC, memo, useCallback, useEffect } from "react";
 
 import { Header } from "../../organisms/layout/Header";
 import { PostForm } from "../../molecules/post/PostForm";
-import { UserModal } from "../../molecules/UserModal";
+import { UserModal } from "../../molecules/user/UserModal";
 import { useSelected } from "../../../customHooks/useSelected";
-import { UserCard } from "../../molecules/UserCard";
+import { UserCard } from "../../molecules/user/UserCard";
 import { useUsers } from "../../../customHooks/useUsers";
 // import { Ibkkk } from "../../../Ibkkk";
 // import { Users } from "../../../dummyData";

@@ -1,11 +1,13 @@
 import { memo, FC } from "react";
 import {
   Box,
+  Divider,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerOverlay,
   Image,
+  List,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -23,43 +25,44 @@ export const FriendDrawer: FC<Props> = memo((props) => {
     <Drawer placement="right" size="xs" onClose={onClose} isOpen={isOpen1}>
       <DrawerOverlay>
         <DrawerContent>
-          <DrawerBody p={0} bg="blue.50">
+          <DrawerBody>
             <Box marginTop={3}>
-              <Text textAlign="center" marginBottom={3} fontWeight="bold">
+              <Text textAlign="center" marginBottom={3}>
                 オンラインの友達
               </Text>
-              <Stack>
-                <Box>
-                  {Users.map((user) => (
-                    <Box
-                      h="120"
+
+              <Box>
+                {Users.map((user) => (
+                  <Box
+                    display="flex"
+                    cursor="pointer"
+                    _hover={{
+                      transform: "scale(.95)",
+                      transition: "all .2s ease-out",
+                      border: "0px",
+                    }}
+                  >
+                    <Image
+                      src={user.photo}
+                      w="80px"
+                      h="80px"
+                      objectFit="cover"
+                      borderRadius="50%"
+                      marginTop={5}
+                      marginRight={10}
+                    />
+
+                    <Text
+                      marginTop={5}
+                      fontWeight="bold"
                       display="flex"
-                      justifyContent="center"
-                      borderRadius="5px"
-                      shadow="md"
-                      rounded="md"
-                      p={3}
-                      cursor="pointer"
-                      _hover={{
-                        transform: "scale(.95)",
-                        transition: "all .2s ease-out",
-                        border: "0px",
-                      }}
+                      alignItems="center"
                     >
-                      <Text marginRight={10} marginTop={10} fontWeight="bold">
-                        {user.userID}
-                      </Text>
-                      <Image
-                        src={user.photo}
-                        w="25%"
-                        h={70}
-                        borderRadius="50%"
-                        marginTop={5}
-                      />
-                    </Box>
-                  ))}
-                </Box>
-              </Stack>
+                      {user.userID}
+                    </Text>
+                  </Box>
+                ))}
+              </Box>
             </Box>
           </DrawerBody>
         </DrawerContent>

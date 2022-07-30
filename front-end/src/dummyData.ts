@@ -16,7 +16,7 @@ export const Users = [
     description:
       "アンレート @1 VC:discord アイアン〜シルバーくらいの方初心者歓迎です！ 雑談しながら楽しくやりましょう #VALORANT募集",
     date: "29分前",
-    photo: "/Pictures/hakone.png",
+    photo: "/Pictures/comme.png",
   },
   {
     id: 2,
@@ -50,8 +50,8 @@ export const Users = [
     userID: "yuikuro",
     device: "PC",
     gameTitle: "Apex",
-    description: "Apex @1 pratinum3 ~",
+    description: "Apex @1 pratinum3 ~ plz",
     date: "33分前",
-    photo: "/Pictures/hakone.png",
+    photo: "/Pictures/comme.png",
   },
 ];

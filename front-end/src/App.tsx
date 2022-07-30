@@ -10,7 +10,7 @@ export default function App() {
   return (
     <ChakraProvider>
       <BrowserRouter>
-        <Register />
+        <Home />
       </BrowserRouter>
     </ChakraProvider>
   );
