@@ -1,4 +1,12 @@
-import { Box, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Input,
+  Stack,
+  StackDivider,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 export const Login = () => {
   return (
@@ -7,14 +15,14 @@ export const Login = () => {
         <Box
           w="100v2"
           h="100vh"
-          bg="cyan.50"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          bg="gray.50"
         >
-          <Box w="70%" h="70%" bg="green" display="flex">
+          <Box w="70%" h="70%" display="flex">
             <Box
-              flex="7"
+              flex="4"
               display="flex"
               alignItems="center"
               flexDirection="column"
@@ -28,13 +36,54 @@ export const Login = () => {
               </Text>
             </Box>
             <Box
-              flex="5"
+              flex="8"
               display="flex"
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
             >
-              <Text>dddd</Text>
+              <Box
+                h="75%"
+                w="90%"
+                borderRadius="10"
+                bg="white"
+                p="10"
+                shadow="md"
+              >
+                <VStack
+                  divider={<StackDivider borderColor="gray.200" />}
+                  spacing={3}
+                  align="stretch"
+                >
+                  <Text textAlign="center" fontWeight="bold">
+                    ログイン
+                  </Text>
+                  <Input placeholder="email" />
+                  <Input placeholder="password" />
+                  <Button
+                    size="md"
+                    bg="blue.200"
+                    fontWeight="bold"
+                    color="gray.700"
+                    w="100%"
+                    alignSelf="center"
+                  >
+                    ログイン
+                  </Button>
+                  <Text textAlign="center" marginTop="5">
+                    パスワードを忘れた方
+                  </Text>
+                  <Button
+                    size="sm"
+                    bg="blue.200"
+                    w="60%"
+                    alignSelf="center"
+                    fontSize="xs"
+                  >
+                    アカウント作成
+                  </Button>
+                </VStack>
+              </Box>
             </Box>
           </Box>
         </Box>
