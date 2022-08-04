@@ -11,7 +11,7 @@ export default function App() {
   return (
     <ChakraProvider>
       <BrowserRouter>
-        <Login />
+        <Home />
       </BrowserRouter>
     </ChakraProvider>
   );
