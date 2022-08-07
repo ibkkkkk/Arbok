@@ -2,10 +2,11 @@ import { Box, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { Post } from "../../molecules/post/Post";
 // import { Users } from "../../../dummyData";
 
-export const TimeLine = (post: any) => {
-  const [posts, setPosts] = useState([]);
+export const TimeLine = () => {
+  const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -13,6 +14,7 @@ export const TimeLine = (post: any) => {
         "/posts/timeline/62d11d06adf1447a5b0ec111"
       );
       console.log(response);
+      setPosts(response.data);
     };
     fetchPosts();
   }, []);
@@ -25,9 +27,9 @@ export const TimeLine = (post: any) => {
       </Text>
 
       <Box>
-        {/* {Users.map((post: any) => (
-          <Post post={post} key={post.id} />
-        ))} */}
+        {posts.map((post: any) => (
+          <Post post={post} key={post._id} />
+        ))}
       </Box>
     </>
   );
