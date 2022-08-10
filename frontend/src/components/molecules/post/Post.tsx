@@ -4,8 +4,6 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { format } from "timeago.js";
 
-// import { Users } from "../../../dummyData";
-
 type Props = {
   post: any;
 };
@@ -17,12 +15,12 @@ export const Post: FC<Props> = (props) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users/${post.userId}`);
+      const response = await axios.get(`/users?userId=${post.userId}`);
       console.log(response);
       setUser(response.data);
     };
     fetchUser();
-  }, []);
+  }, [post.userId]);
 
   return (
     <>

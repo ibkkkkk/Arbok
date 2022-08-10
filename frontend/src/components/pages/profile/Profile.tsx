@@ -1,13 +1,28 @@
 import { Box, Image, Text } from "@chakra-ui/react";
+import { FC, useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import { HeaderWithoutProfile } from "../../organisms/layout/HeaderWithoutProfile";
 import { TimeLine } from "../../organisms/layout/TimeLine";
-import { Users } from "../../../dummyData";
-import { FC } from "react";
 
-type Props = {};
+type Props = {
+  username?: string;
+};
 
-export const Profile: FC<Props> = (props) => {
+export const Profile: FC<Props> = () => {
+  const [user, setUser] = useState<any>({});
+  const username = useParams().username;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?username=${username}`);
+      console.log(response);
+      setUser(response.data);
+    };
+    fetchUser();
+  }, []);
+
   return (
     <>
       <HeaderWithoutProfile />
@@ -20,7 +35,7 @@ export const Profile: FC<Props> = (props) => {
           objectFit="cover"
         />
         <Image
-          src="/Pictures/panda.png"
+          src={user.profilePicture || "/Pictures/noAvatar.png"}
           w={150}
           h={160}
           borderRadius="50%"
@@ -40,10 +55,10 @@ export const Profile: FC<Props> = (props) => {
         fontSize="25"
         marginBottom="10"
       >
-        {Users[0].userid}
+        {user.username}
       </Text>
 
-      <TimeLine />
+      <TimeLine username={username!} />
     </>
   );
 };

@@ -1,8 +1,6 @@
-const router = require("express").Router()
+const router = require("express").Router();
 
 const User = require("../models/User");
-
-
 
 // 更新
 router.post("/:id", async (req, res) => {
@@ -10,16 +8,15 @@ router.post("/:id", async (req, res) => {
     try {
       const user = await User.findByIdAndUpdate(req.params.id, {
         $set: req.body,
-      })
-      return res.status(200).json("success")
+      });
+      return res.status(200).json("success");
     } catch (err) {
-      return res.status(500).json(err)
+      return res.status(500).json(err);
     }
   } else {
-    return res.status(403).json("情報を更新できません")
+    return res.status(403).json("情報を更新できません");
   }
-})
-
+});
 
 // 削除
 router.delete("/:id", async (req, res) => {
@@ -35,48 +32,63 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// // 取得
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
+//     const { password, email, ...other } = user._doc;
+//     return res.status(200).json(other);
+//   } catch (err) {
+//     return res.status(500).json(err);
+//   }
+// });
 
-// 取得
-router.get("/:id", async (req, res) => {
-    try {
-      const user = await User.findById(req.params.id);
-      const { password, email, ...other } = user._doc
-      return res.status(200).json(other);
-    } catch (err) {
-      return res.status(500).json(err);
-    }
+// クエリからユーザー情報を取得
+router.get("/", async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
+
+  try {
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
+
+    const { password, email, ...other } = user._doc;
+    return res.status(200).json(other);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 });
-
 
 // フォロー
 router.put("/:id/follow", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-      const user = await User.findById(req.params.id)
-      const currentUser = await User.findById(req.body.userId)
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
 
       if (!user.followers.includes(req.body.userId)) {
         await user.updateOne({
           $push: {
             followers: req.body.userId,
           },
-        })
+        });
         await currentUser.updateOne({
           $push: {
             followings: req.params.id,
           },
-        })
-        return res.status(200).json("follow success")
+        });
+        return res.status(200).json("follow success");
       } else {
-        return res.status(403).json("Already followed!")
+        return res.status(403).json("Already followed!");
       }
     } catch (err) {
-      return res.status(500).json(err)
+      return res.status(500).json(err);
     }
   } else {
-    return res.status(500).json("can't follow yourself")
+    return res.status(500).json("can't follow yourself");
   }
-})
+});
 
 // アンフォロー
 router.put("/:id/unfollow", async (req, res) => {
@@ -108,6 +120,4 @@ router.put("/:id/unfollow", async (req, res) => {
   }
 });
 
-
-
-module.exports = router
+module.exports = router;
