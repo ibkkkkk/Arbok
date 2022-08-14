@@ -33,6 +33,7 @@ export const UserCard: FC<Props> = memo((props) => {
             borderRadius="full"
             alt={""}
             m="auto"
+            objectFit="cover"
           />
 
           <Text

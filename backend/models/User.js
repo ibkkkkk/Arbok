@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
   },
   coverPicture: {
     type: String,
-    default: true,
+    default: "",
   },
   followings: {
     type: Array,
@@ -37,13 +37,13 @@ const UserSchema = new mongoose.Schema({
     default: [],
   },
   isAdmin: {
-    type: String, 
-    default: false
+    type: String,
+    default: false,
   },
   description: {
     type: String,
-    max: 70
+    max: 70,
   },
 });
 
-module.exports = mongoose.model("User",  UserSchema)
+module.exports = mongoose.model("User", UserSchema);
