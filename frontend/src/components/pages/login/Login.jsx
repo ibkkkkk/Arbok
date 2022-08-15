@@ -7,16 +7,18 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { loginCall } from "../../../actionCalls";
+import { AuthContext } from "../../../state/AuthContext";
 
-type Props = {
-  email: string;
-  password: string;
-};
+// type Props = {
+//   email: string;
+//   password: string;
+// };
 
-export const Login: FC<Props> = () => {
-  // const email = useRef(null);
+export const Login = () => {
+  // const email = useRef();
   // const { handleSubmit } = useForm();
 
   // const onSubmit = (data) => {
@@ -24,9 +26,18 @@ export const Login: FC<Props> = () => {
   //   console.log(email.current);
   // };
 
-  const { register, handleSubmit } = useForm<Props>();
+  const { register, handleSubmit } = useForm();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
 
-  const onSubmit: SubmitHandler<Props> = (data) => console.log(data);
+  const onSubmit = (data) => {
+    loginCall(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      dispatch
+    );
+  };
 
   return (
     <Box>
