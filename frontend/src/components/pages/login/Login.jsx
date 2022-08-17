@@ -39,6 +39,8 @@ export const Login = () => {
     );
   };
 
+  console.log(user);
+
   return (
     <Box>
       <Box
@@ -105,8 +107,8 @@ export const Login = () => {
                       {...register("password", {
                         required: "This is required",
                         minLength: {
-                          value: 6,
-                          message: "Minimum length should be 6",
+                          value: 5,
+                          message: "Minimum length should be 5",
                         },
                       })}
                     />
