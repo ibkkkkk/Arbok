@@ -8,33 +8,43 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const { register, handleSubmit } = useForm();
-  const { password } = useRef();
-  const { passwordConfirmation } = useRef();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    trigger,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    criteriaMode: "all",
+  });
+  const { navigate } = useNavigate();
 
   const onSubmit = async (data) => {
     // パスワードと確認用を一致させる
-    if (data.password.value !== data.passwordConfirmation.value) {
-      data.passwordConfirmation.setCustomValidity("パスワード違います");
-    } else {
-      try {
-        const user = {
-          username: data.username.value,
-          email: data.email.value,
-          password: data.password.value,
-        };
-        await axios.post("/auth/register", user);
-        // register API を叩く
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
+    // if (data.password.value !== data.passwordConfirmation.value) {
+    //   data.passwordConfirmation.setCustomValidity("パスワード違います");
+    // } else {
+    //   try {
+    const user = {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    };
 
+    // // console.log(user);
+    // await axios.post("auth/register", user);
+    // navigate("/login");
+    // register API を叩く
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    // }
+  };
   return (
     <>
       <Box>
@@ -87,6 +97,7 @@ export const Register = () => {
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl>
                       <Input
+                        id="field1"
                         type="text"
                         marginBottom={4}
                         placeholder="username"
@@ -95,6 +106,7 @@ export const Register = () => {
                         })}
                       />
                       <Input
+                        id="field2"
                         type="email"
                         marginBottom={4}
                         placeholder="email"
@@ -103,28 +115,37 @@ export const Register = () => {
                         })}
                       />
                       <Input
+                        id="field3"
                         type="password"
                         marginBottom={4}
                         placeholder="password"
-                        ref={password}
                         {...register("password", {
                           required: "This is required",
                           minLength: {
                             value: 5,
-                            message: "Minimum length should be 5",
+                          },
+                          onBlur: () => {
+                            if (getValues("passwordConfirmation")) {
+                              trigger("passwordConfirmation");
+                            }
                           },
                         })}
                       />
                       <Input
+                        id="field4"
                         type="password"
                         marginBottom={4}
                         placeholder="Confirm password"
-                        ref={passwordConfirmation}
                         {...register("passwordConfirmation", {
                           required: "This is required",
                           minLength: {
                             value: 5,
-                            message: "Minimum length should be 5",
+                          },
+                          validate: (value) => {
+                            return (
+                              value === getValues("password") ||
+                              console.log("need password")
+                            );
                           },
                         })}
                       />
