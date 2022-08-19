@@ -1,9 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../state/AuthContext";
 
 import { Post } from "../../molecules/post/Post";
-// import { Users } from "../../../dummyData";
 
 type Props = {
   username: string;
@@ -11,17 +11,17 @@ type Props = {
 
 export const TimeLine: FC<Props> = ({ username }) => {
   const [posts, setPosts] = useState<any>([]);
-
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     const fetchPosts = async () => {
       const response = username
-        ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get("/posts/timeline/62d11d06adf1447a5b0ec111");
-      console.log(response);
+        ? await axios.get(`/posts/profile/${username}`) //profile
+        : await axios.get(`/posts/timeline/${user._id}`); // home
+      // console.log(response);
       setPosts(response.data);
     };
     fetchPosts();
-  }, [username]);
+  }, [username, user._id]);
 
   return (
     <>

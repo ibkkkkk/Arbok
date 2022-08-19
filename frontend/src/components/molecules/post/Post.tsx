@@ -35,7 +35,11 @@ export const Post: FC<Props> = (props) => {
         <Box>
           <Box display="flex" alignItems="center" position="relative">
             <Image
-              src={user.profilePicture || "/Pictures/noAvatar.png"}
+              src={
+                user.profilePicture
+                  ? user.profilePicture
+                  : "/Pictures/noAvatar.png"
+              }
               w="38px"
               h="38px"
               borderRadius="50%"

@@ -7,14 +7,19 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
+import { useContext } from "react";
+import { AuthContext } from "../../../state/AuthContext";
 
 export const PostForm = () => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       <Box display="flex" h={100} marginBottom={5}>
         <Image
-          src="/Pictures/panda.png"
-          alt="panda"
+          src={
+            user.profilePicture ? user.profilePicture : "/Pictures/noAvatar.png"
+          }
+          alt=""
           borderRadius="50%"
           w="32px"
           h="32px"

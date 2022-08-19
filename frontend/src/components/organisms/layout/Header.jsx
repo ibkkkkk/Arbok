@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BellIcon, ChatIcon } from "@chakra-ui/icons";
 import { Heading, Image, Box, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { MenuButton } from "../../atoms/MenuButton";
 import { HeaderDrawer } from "../../molecules/HeaderDrawer";
+import { AuthContext } from "../../../state/AuthContext";
 
 export const Header = () => {
+  const { user } = useContext(AuthContext);
   const { onOpen, onClose, isOpen } = useDisclosure();
   const navigate = useNavigate();
 
@@ -14,8 +16,8 @@ export const Header = () => {
     navigate("/");
   };
 
-  const onClickP = () => {
-    navigate("/profile/:userid");
+  const onClickProfile = () => {
+    navigate(`/profile/${user.username}`);
   };
   return (
     <>
@@ -31,6 +33,7 @@ export const Header = () => {
         </Box>
         <Box display="flex" alignItems="center">
           <Heading
+            paddingLeft={16}
             as="h1"
             fontSize={{ base: "md", md: "lg" }}
             color="white"
@@ -51,7 +54,11 @@ export const Header = () => {
           <BellIcon mx={2} />
           <ChatIcon />
           <Image
-            src="/Pictures/panda.png"
+            src={
+              user.profilePicture
+                ? user.profilePicture
+                : "/Pictures/noAvatar.png"
+            }
             alt=""
             borderRadius="50%"
             w="20px"
@@ -59,7 +66,7 @@ export const Header = () => {
             marginLeft={2}
             marginBottom={0.5}
             objectFit="cover"
-            onClick={onClickP}
+            onClick={onClickProfile}
           />
         </Box>
       </Box>

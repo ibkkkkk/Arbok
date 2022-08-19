@@ -20,9 +20,7 @@ export const HeaderDrawer: FC<Props> = memo((props) => {
         <DrawerContent>
           <DrawerBody p={0} bg="pink.200">
             <Button w="100%">TOP</Button>
-            <Button w="100%">ユーザー一覧</Button>
-            <Button w="100%">設定</Button>
-            <Button w="100%">萌ぞう</Button>
+            <Button w="100%">ユーザ一覧</Button>
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>
