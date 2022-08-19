@@ -39,8 +39,6 @@ export const Login = () => {
     );
   };
 
-  console.log(user);
-
   return (
     <Box>
       <Box
@@ -93,6 +91,7 @@ export const Login = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <FormControl>
                     <Input
+                      id="email"
                       marginBottom={5}
                       type="email"
                       placeholder="email"
@@ -101,6 +100,7 @@ export const Login = () => {
                       })}
                     />
                     <Input
+                      id="password"
                       marginBottom={5}
                       type="password"
                       placeholder="password"

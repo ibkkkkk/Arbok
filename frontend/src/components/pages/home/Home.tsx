@@ -7,8 +7,6 @@ import { UserModal } from "../../molecules/user/UserModal";
 import { useSelected } from "../../../customHooks/useSelected";
 import { UserCard } from "../../molecules/user/UserCard";
 import { useUsers } from "../../../customHooks/useUsers";
-// import { Ibkkk } from "../../../Ibkkk";
-// import { Users } from "../../../dummyData";
 
 export const Home: FC = memo((user) => {
   const { getUsers, users } = useUsers();

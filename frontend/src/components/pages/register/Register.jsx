@@ -8,43 +8,42 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    trigger,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur",
-    criteriaMode: "all",
-  });
-  const { navigate } = useNavigate();
+  const username = useRef();
+  const password = useRef();
+  const passwordConfirmation = useRef();
+  const email = useRef();
+  const navigate = useNavigate();
+  // const { register, getValues, trigger } = useForm({
+  //   mode: "onBlur",
+  //   criteriaMode: "all",
+  // });
 
-  const onSubmit = async (data) => {
-    // パスワードと確認用を一致させる
-    // if (data.password.value !== data.passwordConfirmation.value) {
-    //   data.passwordConfirmation.setCustomValidity("パスワード違います");
-    // } else {
-    //   try {
-    const user = {
-      username: data.username,
-      email: data.email,
-      password: data.password,
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // // console.log(user);
-    // await axios.post("auth/register", user);
-    // navigate("/login");
-    // register API を叩く
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // }
+    if (password.current.value !== passwordConfirmation.current.value) {
+      passwordConfirmation.current.setCustomValidity("パスワードが違います");
+    } else {
+      try {
+        const user = {
+          username: username.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        };
+
+        await axios.post("/auth/register", user);
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
+
   return (
     <>
       <Box>
@@ -94,60 +93,58 @@ export const Register = () => {
                   <Text textAlign="center" fontWeight="bold">
                     新規登録
                   </Text>
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={(e) => handleSubmit(e)}>
                     <FormControl>
                       <Input
+                        ref={username}
                         id="field1"
                         type="text"
                         marginBottom={4}
                         placeholder="username"
-                        {...register("username", {
-                          required: "This is required",
-                        })}
                       />
                       <Input
+                        ref={email}
                         id="field2"
                         type="email"
                         marginBottom={4}
                         placeholder="email"
-                        {...register("email", {
-                          required: "This is required",
-                        })}
                       />
                       <Input
+                        ref={password}
                         id="field3"
                         type="password"
                         marginBottom={4}
                         placeholder="password"
-                        {...register("password", {
-                          required: "This is required",
-                          minLength: {
-                            value: 5,
-                          },
-                          onBlur: () => {
-                            if (getValues("passwordConfirmation")) {
-                              trigger("passwordConfirmation");
-                            }
-                          },
-                        })}
+                        // {...register("password", {
+                        //   required: "This is required",
+                        //   minLength: {
+                        //     value: 5,
+                        //   },
+                        //   onBlur: () => {
+                        //     if (getValues("passwordConfirmation")) {
+                        //       trigger("passwordConfirmation");
+                        //     }
+                        //   },
+                        // })}
                       />
                       <Input
+                        ref={passwordConfirmation}
                         id="field4"
                         type="password"
                         marginBottom={4}
                         placeholder="Confirm password"
-                        {...register("passwordConfirmation", {
-                          required: "This is required",
-                          minLength: {
-                            value: 5,
-                          },
-                          validate: (value) => {
-                            return (
-                              value === getValues("password") ||
-                              console.log("need password")
-                            );
-                          },
-                        })}
+                        // {...register("passwordConfirmation", {
+                        //   required: "This is required",
+                        //   minLength: {
+                        //     value: 5,
+                        //   },
+                        //   validate: (value) => {
+                        //     return (
+                        //       value === getValues("password") ||
+                        //       console.log("need password")
+                        //     );
+                        //   },
+                        // })}
                       />
                     </FormControl>
                     <Button

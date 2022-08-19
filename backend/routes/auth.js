@@ -1,4 +1,4 @@
-const router = require("express").Router()
+const router = require("express").Router();
 
 const User = require("../models/User");
 
@@ -11,6 +11,7 @@ router.post("/register", async (req, res) => {
       password: req.body.password,
     });
 
+    //save user
     const user = await newUser.save();
     return res.status(200).json(user);
   } catch (err) {
@@ -21,20 +22,16 @@ router.post("/register", async (req, res) => {
 // ログイン
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email })
-    if (!user) return res.status(404).send("not found user")
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(404).send("not found user");
 
-    const validUser = req.body.password === user.password
-    if (!validUser) return res.status(400).json("incorrect password")
+    const validUser = req.body.password === user.password;
+    if (!validUser) return res.status(400).json("incorrect password");
 
-    return res.status(200).json(user)
-
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(500).json(err);
   }
-  catch (err) {
-    return res.status(500).json(err)
-  }
-})
+});
 
-
-
-module.exports = router
+module.exports = router;
