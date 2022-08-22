@@ -1,4 +1,4 @@
-import { memo, FC } from "react";
+import { memo, FC, useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -13,6 +13,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 import { User } from "../../../types/user";
 
@@ -24,6 +25,8 @@ type Props = {
 
 export const UserModal: FC<Props> = memo((props) => {
   const { isOpen, onClose, user } = props;
+  const [posts, setPosts] = useState();
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="lg">
       <ModalOverlay>

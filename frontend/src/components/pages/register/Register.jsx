@@ -17,6 +17,10 @@ export const Register = () => {
   const password = useRef();
   const passwordConfirmation = useRef();
   const email = useRef();
+
+  const onClickLoginButton = () => {
+    navigate("/login");
+  };
   const navigate = useNavigate();
   // const { register, getValues, trigger } = useForm({
   //   mode: "onBlur",
@@ -78,7 +82,7 @@ export const Register = () => {
               alignItems="center"
             >
               <Box
-                h="75%"
+                h="77%"
                 w="90%"
                 borderRadius="10"
                 bg="white"
@@ -159,15 +163,18 @@ export const Register = () => {
                       アカウント作成
                     </Button>
                   </form>
-                  <Button
-                    size="sm"
-                    bg="blue.200"
-                    w="60%"
-                    alignSelf="center"
-                    fontSize="xs"
-                  >
-                    ログイン
-                  </Button>
+                  <Text fontSize="sm" fontWeight="bold" textAlign="center">
+                    <span
+                      style={{
+                        color: "lightBlue",
+                        cursor: "pointer",
+                      }}
+                      onClick={onClickLoginButton}
+                    >
+                      ログイン
+                    </span>
+                    はこちら
+                  </Text>
                 </VStack>
               </Box>
             </Box>

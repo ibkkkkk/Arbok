@@ -1,14 +1,28 @@
 import { Box, Image, Stack, Text } from "@chakra-ui/react";
-import { memo, FC } from "react";
+import { memo, FC, useContext, useState, useEffect } from "react";
 
-type Props = {
-  id: number;
-  imgUrl: string;
-  userName: string;
-  onClick: (id: number) => void;
-};
-export const UserCard: FC<Props> = memo((props) => {
-  const { imgUrl, userName, id, onClick } = props;
+import axios from "axios";
+import { AuthContext } from "../../../state/AuthContext";
+
+// type Props = {
+//   id: number;
+//   imgUrl: string;
+//   userName: string;
+//   onClick: (id: number) => void;
+// };
+export const UserCard = memo((props) => {
+  const { img, username, id, onClick, post } = props;
+
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await axios.get(`/posts/${post._id}`); // home
+      console.log(response.data);
+    };
+    fetchPosts();
+  }, [post._id]);
+
   return (
     <Box
       w={200}
@@ -23,15 +37,15 @@ export const UserCard: FC<Props> = memo((props) => {
         transition: "all .2s ease-out",
         border: "0px",
       }}
-      onClick={() => onClick(id)}
+      // onClick={() => onClick(id)}
     >
       <Stack textAlign="center">
         <Box>
           <Image
             boxSize="100px"
-            src={imgUrl}
+            src={user.profilePicture}
             borderRadius="full"
-            alt={""}
+            alt=""
             m="auto"
             objectFit="cover"
           />
@@ -41,7 +55,7 @@ export const UserCard: FC<Props> = memo((props) => {
             fontWeight="bold"
             marginTop={4}
           >
-            {userName}
+            {user.username}
           </Text>
           <Text fontSize="sm" margin={2}>
             3分前

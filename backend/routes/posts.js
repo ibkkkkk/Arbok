@@ -80,6 +80,17 @@ router.put("/:id/like", async (req, res) => {
   }
 });
 
+// xxxx
+router.get("/timeline/:userId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.params.userId);
+    const userPosts = await Post.find({ userId: currentUser._id });
+    return res.status(200).json(userPosts);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 // タイムラインの投稿の取得
 router.get("/timeline/:userId", async (req, res) => {
   try {

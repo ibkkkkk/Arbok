@@ -1,4 +1,4 @@
-import { DragHandleIcon } from "@chakra-ui/icons";
+import { DeleteIcon, DragHandleIcon } from "@chakra-ui/icons";
 import { Box, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
@@ -54,7 +54,7 @@ export const Post: FC<Props> = (props) => {
             <Text marginLeft="4" marginTop="2" fontSize="12">
               {format(post.createdAt)}
             </Text>
-            <DragHandleIcon position="absolute" left="95%" />
+            <DeleteIcon position="absolute" left="95%" />
           </Box>
           <Box w="90%" m="auto">
             <Text marginTop="5" marginBottom="3">

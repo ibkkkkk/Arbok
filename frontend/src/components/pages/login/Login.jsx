@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { FC, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { loginCall } from "../../../actionCalls";
 import { AuthContext } from "../../../state/AuthContext";
 
@@ -25,9 +26,13 @@ export const Login = () => {
   //   data.preventDefault();
   //   console.log(email.current);
   // };
-
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const onClickRegister = () => {
+    navigate("/register");
+  };
 
   const onSubmit = (data) => {
     loginCall(
@@ -37,6 +42,7 @@ export const Login = () => {
       },
       dispatch
     );
+    navigate("/");
   };
 
   return (
@@ -72,7 +78,7 @@ export const Login = () => {
             alignItems="center"
           >
             <Box
-              h="75%"
+              h="73%"
               w="90%"
               borderRadius="10"
               bg="white"
@@ -134,6 +140,7 @@ export const Login = () => {
                   w="60%"
                   alignSelf="center"
                   fontSize="xs"
+                  onClick={onClickRegister}
                 >
                   アカウント作成
                 </Button>
