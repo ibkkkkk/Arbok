@@ -3,19 +3,25 @@ import {
   Box,
   Button,
   Divider,
+  FormControl,
+  FormLabel,
   Image,
   Input,
   Select,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useContext, useRef, useState } from "react";
+import axios from "axios";
+
 import { AuthContext } from "../../../state/AuthContext";
 
 export const PostForm = () => {
   const { user } = useContext(AuthContext);
   const description = useRef();
   const [post, setPost] = useState();
+  const [file, setFile] = useState(null);
+
+  console.log(file);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,13 +44,7 @@ export const PostForm = () => {
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <Box
-          display="flex"
-          h={100}
-          marginBottom={5}
-          w="100%"
-          position="relative"
-        >
+        <Box display="flex" h={100} marginBottom={5} position="relative">
           <Image
             src={
               user.profilePicture
@@ -57,16 +57,34 @@ export const PostForm = () => {
             h="32px"
             m="auto"
             objectFit="cover"
+            zIndex="10"
           />
-          <AttachmentIcon position="absolute" right={4} top={3} />
+
+          <Box>
+            <FormLabel htmlFor="file">
+              <AttachmentIcon
+                zIndex="100"
+                cursor="pointer"
+                position="absolute"
+                top={3}
+                right={4}
+              />
+              <Input
+                type="file"
+                id="file"
+                accept=".png, .jpeg, .jpg"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </FormLabel>
+          </Box>
 
           {/* <form onSubmit={(e) => handleSubmit(e)}> */}
-
           <Input
             w="90%"
             placeholder="仲間を募集しよう！"
             variant="unstyled"
-            size="lg"
+            size="md"
             ref={description}
             required
           />

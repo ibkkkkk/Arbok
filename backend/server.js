@@ -10,6 +10,7 @@ const cors = require("cors");
 const userRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const postsRouter = require("./routes/posts");
+const uploadRouter = require("./routes/upload");
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/upload", uploadRouter);
 
 app.get("/", (req, res) => {
   res.send("hello!");
