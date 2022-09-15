@@ -1,22 +1,22 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { AuthReducer } from "./AuthReducer";
 
 // 最初のユーザー状態を定義
 const initialState = {
-  // user: null,
-  user: {
-    _id: "",
-    username: "",
-    email: "s",
-    password: "",
-    profilePicture: "",
-    coverPicture: "",
-    followings: [],
-    followers: [],
-    isAdmin: "",
-  },
-  isFetching: false,
-  error: false,
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  // user: {
+  //   _id: "",
+  //   username: "",
+  //   email: "s",
+  //   password: "",
+  //   profilePicture: "",
+  //   coverPicture: "",
+  //   followings: [],
+  //   followers: [],
+  //   isAdmin: "",
+  // },
+  // isFetching: false,
+  // error: false,
 };
 
 // 状態をグローバルに管理する
@@ -24,6 +24,10 @@ export const AuthContext = createContext(initialState);
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
 
   return (
     <AuthContext.Provider

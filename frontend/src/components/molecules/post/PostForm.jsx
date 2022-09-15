@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Divider,
-  FormControl,
   FormLabel,
   Image,
   Input,
@@ -21,7 +20,8 @@ export const PostForm = () => {
   const [post, setPost] = useState();
   const [file, setFile] = useState(null);
 
-  console.log(file);
+  // console.log(Math.sqrt(847213569));
+  console.log(Math.pow(29107, 2));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +30,20 @@ export const PostForm = () => {
       userId: user._id,
       description: description.current.value,
     };
+
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      console.log(newPost);
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
     try {
       await axios.post("/posts", newPost);
@@ -92,12 +106,18 @@ export const PostForm = () => {
 
         <Box>
           <Box display="flex">
-            <Select placeholder="デバイス" size="xs" w="20%" marginRight={3}>
+            <Select
+              placeholder="デバイス"
+              size="xs"
+              w="20%"
+              marginRight={3}
+              required
+            >
               <option value="option1">PS</option>
               <option value="option2">PC</option>
               <option value="option3">Switch</option>
             </Select>
-            <Select placeholder="ゲームタイトル" size="xs" w="20%">
+            <Select placeholder="ゲームタイトル" size="xs" w="20%" required>
               <option value="option1">VALORANT</option>
               <option value="option2">APEX</option>
               <option value="option3">FORTNITE</option>
