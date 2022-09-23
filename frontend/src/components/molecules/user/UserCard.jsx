@@ -1,7 +1,8 @@
-import { Box, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Image, Stack, Text, Flex } from "@chakra-ui/react";
 import { memo, FC, useContext, useState, useEffect } from "react";
-
+import { format } from "timeago.js";
 import axios from "axios";
+
 import { AuthContext } from "../../../state/AuthContext";
 
 // type Props = {
@@ -41,24 +42,34 @@ export const UserCard = memo((props) => {
     >
       <Stack textAlign="center">
         <Box>
+          <Flex justifyContent="space-between" w="100%">
+            <Text bg="#cde4ff" w="25%" fontSize="sm" marginLeft={2}>
+              {post.device}
+            </Text>
+
+            <Text bg="#fff8e8" fontSize="sm" marginRight={2}>
+              {post.title}
+            </Text>
+          </Flex>
           <Image
-            boxSize="100px"
-            src={user.profilePicture}
+            boxSize="90px"
+            src={user.profilePicture || "/Pictures/noAvatar.png"}
             borderRadius="full"
             alt=""
             m="auto"
             objectFit="cover"
+            marginTop="3"
           />
 
           <Text
             fontSize={{ base: "md", md: "lg" }}
             fontWeight="bold"
-            marginTop={4}
+            marginTop={3}
           >
             {user.username}
           </Text>
-          <Text fontSize="sm" margin={2}>
-            3分前
+          <Text fontSize="sm" margin={1}>
+            {format(post.createdAt)}
           </Text>
         </Box>
       </Stack>

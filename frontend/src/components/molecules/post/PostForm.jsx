@@ -17,11 +17,10 @@ import { AuthContext } from "../../../state/AuthContext";
 export const PostForm = () => {
   const { user } = useContext(AuthContext);
   const description = useRef();
+  const device = useRef();
+  const title = useRef();
   const [post, setPost] = useState();
   const [file, setFile] = useState(null);
-
-  // console.log(Math.sqrt(847213569));
-  console.log(Math.pow(29107, 2));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +28,8 @@ export const PostForm = () => {
     const newPost = {
       userId: user._id,
       description: description.current.value,
+      device: device.current.value,
+      title: title.current.value,
     };
 
     if (file) {
@@ -37,7 +38,7 @@ export const PostForm = () => {
       data.append("name", fileName);
       data.append("file", file);
       newPost.img = fileName;
-      console.log(newPost);
+      // console.log(newPost);
       try {
         await axios.post("/upload", data);
       } catch (err) {
@@ -108,19 +109,26 @@ export const PostForm = () => {
           <Box display="flex">
             <Select
               placeholder="デバイス"
+              ref={device}
               size="xs"
               w="20%"
               marginRight={3}
               required
             >
-              <option value="option1">PS</option>
-              <option value="option2">PC</option>
-              <option value="option3">Switch</option>
+              <option value="PS">PS</option>
+              <option value="PC">PC</option>
+              <option value="Switch">Switch</option>
             </Select>
-            <Select placeholder="ゲームタイトル" size="xs" w="20%" required>
-              <option value="option1">VALORANT</option>
-              <option value="option2">APEX</option>
-              <option value="option3">FORTNITE</option>
+            <Select
+              placeholder="ゲームタイトル"
+              size="xs"
+              w="20%"
+              ref={title}
+              required
+            >
+              <option value="VALORANT">VALORANT</option>
+              <option value="APEX">APEX</option>
+              <option value="FORTNITE">FORTNITE</option>
             </Select>
           </Box>
           <Box display="flex" justifyContent="flex-end" mx={75}>
