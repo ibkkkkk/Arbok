@@ -5,20 +5,18 @@ import { Header } from "../../organisms/layout/Header";
 import { PostForm } from "../../molecules/post/PostForm";
 import { UserCard } from "../../molecules/user/UserCard";
 import { AuthContext } from "../../../state/AuthContext";
-// import { UserModal } from "../../molecules/user/UserModal";
-// import { useSelected } from "../../../customHooks/useSelected";
-// import { useUsers } from "../../../customHooks/useUsers";
+import { UserModal } from "../../molecules/user/UserModal";
+import { useSelected } from "../../../customHooks/useSelected";
+import { useUsers } from "../../../customHooks/useUsers";
 
 export const Home = memo(() => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
-  // const { getPosts, posts } = useUsers();
-  // const { onOpen, onClose, isOpen } = useDisclosure();
-  // const { selectUser, onSelectUser } = useSelected();
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await axios.get(`/posts/timeline/${user._id}`);
+      const response = await axios.get(`posts/timeline/${posts._id}`);
       // console.log(response.data);
       setPosts(response.data);
     };
@@ -27,12 +25,9 @@ export const Home = memo(() => {
 
   // useEffect(() => getPosts(), []);
 
-  // const onClickUser = useCallback(
-  //   (id) => {
-  //     onSelectUser({ id, users, onOpen });
-  //   },
-  //   [users]
-  // );
+  const onClickUser = () => {
+    onOpen();
+  };
 
   return (
     <>
@@ -53,10 +48,9 @@ export const Home = memo(() => {
                 <WrapItem key={post.id} mx="auto">
                   <UserCard
                     post={post}
-                    // id={post.id}
                     // img={posts.profilePicture}
                     // username={post.username}
-                    // onClick={onClickUser}
+                    onClick={onClickUser}
                   />
                 </WrapItem>
               ))}
@@ -64,7 +58,7 @@ export const Home = memo(() => {
           }
         </Box>
       </Box>
-      {/* <UserModal isOpen={isOpen} onClose={onClose} user={selectUser} /> */}
+      <UserModal isOpen={isOpen} onClose={onClose} post={posts} />
     </>
   );
 });

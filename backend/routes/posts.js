@@ -47,65 +47,75 @@ router.delete("/:id", async (req, res) => {
 });
 
 // 取得
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const post = await Post.findById(req.params.id);
+//     return res.status(200).json(post);
+//   } catch (err) {
+//     return res.status(403).json(err);
+//   }
+// });
+
+// 全取得
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await P.find(req.params.id);
     return res.status(200).json(post);
   } catch (err) {
     return res.status(403).json(err);
   }
 });
 
-// いいね
-router.put("/:id/like", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (!post.likes.includes(req.body.userId)) {
-      await post.updateOne({
-        $push: {
-          likes: req.body.userId,
-        },
-      });
-      return res.status(200).json("いいね");
-    } else {
-      await post.updateOne({
-        $pull: {
-          likes: req.body.userId,
-        },
-      });
-      return res.status(200).json("いいねを外しました");
-    }
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-});
+// // いいね
+// router.put("/:id/like", async (req, res) => {
+//   try {
+//     const post = await Post.findById(req.params.id);
+//     if (!post.likes.includes(req.body.userId)) {
+//       await post.updateOne({
+//         $push: {
+//           likes: req.body.userId,
+//         },
+//       });
+//       return res.status(200).json("いいね");
+//     } else {
+//       await post.updateOne({
+//         $pull: {
+//           likes: req.body.userId,
+//         },
+//       });
+//       return res.status(200).json("いいねを外しました");
+//     }
+//   } catch (err) {
+//     return res.status(500).json(err);
+//   }
+// });
 
 // xxxx
 router.get("/timeline/:userId", async (req, res) => {
   try {
-    const currentUser = await User.findById(req.params.userId);
-    const userPosts = await Post.find({ userId: currentUser._id });
+    // const currentUser = await User.findById(req.params.userId);
+    const userPosts = await Post.find();
     return res.status(200).json(userPosts);
   } catch (err) {
     return res.status(500).json(err);
   }
 });
 
-// タイムラインの投稿の取得
-router.get("/timeline/:userId", async (req, res) => {
-  try {
-    const currentUser = await User.findById(req.params.userId);
-    const userPosts = await Post.find({ userId: currentUser._id });
-    const friendPosts = await Promise.all(
-      currentUser.followings.map((friendId) => {
-        return Post.find({ userId: friendId });
-      })
-    );
-    return res.status(200).json(userPosts.concat(...friendPosts));
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-});
+// // タイムラインの投稿の取得
+// router.get("/timeline/:userId", async (req, res) => {
+//   try {
+//     const currentUser = await User.findById(req.params.userId);
+//     const userPosts = await Post.find({ userId: currentUser._id });
+//     const friendPosts = await Promise.all(
+//       currentUser.followings.map((friendId) => {
+//         return Post.find({ userId: friendId });
+//       })
+//     );
+//     return res.status(200).json(userPosts.concat(...friendPosts));
+//   } catch (err) {
+//     return res.status(500).json(err);
+//   }
+// });
 
 // プロフィール専用のタイムライン
 router.get("/profile/:username", async (req, res) => {

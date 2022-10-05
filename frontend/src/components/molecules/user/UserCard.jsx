@@ -12,17 +12,19 @@ import { AuthContext } from "../../../state/AuthContext";
 //   onClick: (id: number) => void;
 // };
 export const UserCard = memo((props) => {
-  const { img, username, id, onClick, post } = props;
+  const { img, username, onClick, post } = props;
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await axios.get(`/posts/${post._id}`); // home
-      console.log(response.data);
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?userId=${post.userId}`);
+      console.log(response);
+      setUser(response.data);
     };
-    fetchPosts();
-  }, [post._id]);
+    fetchUser();
+  }, [post.userId]);
 
   return (
     <Box
@@ -38,7 +40,7 @@ export const UserCard = memo((props) => {
         transition: "all .2s ease-out",
         border: "0px",
       }}
-      // onClick={() => onClick(id)}
+      onClick={onClick}
     >
       <Stack textAlign="center">
         <Box>

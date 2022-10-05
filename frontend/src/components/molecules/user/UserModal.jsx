@@ -1,4 +1,5 @@
-import { memo, FC, useState, useEffect } from "react";
+// defaultValue
+import { memo, FC, useState, useEffect, useContext, useCallback } from "react";
 import {
   FormControl,
   FormLabel,
@@ -14,21 +15,39 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { AuthContext } from "../../../state/AuthContext";
 
-import { User } from "../../../types/user";
+export const UserModal = memo((props) => {
+  const { isOpen, onClose, post } = props;
+  // const { user } = useContext(AuthContext);
+  const [posts, setPosts] = useState([]);
 
-type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-  user: User | null;
-};
+  // const getPosts = useCallback(() => {
+  //   const fetchPosts = async () => {
+  //     const response = await axios.get(`/posts/timeline/${user._id}`);
+  //     console.log(response.data);
+  //     setPosts(response.data);
+  //   };
+  //   fetchPosts();
+  // }, []);
 
-export const UserModal: FC<Props> = memo((props) => {
-  const { isOpen, onClose, user } = props;
-  const [posts, setPosts] = useState();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?userId=${post.userId}`);
+      console.log(response);
+      setPosts(response.data);
+    };
+    fetchUser();
+  }, [post.userId]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="lg">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      autoFocus={false}
+      size="lg"
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay>
         <ModalContent
           pb={4}
@@ -53,7 +72,7 @@ export const UserModal: FC<Props> = memo((props) => {
             <Stack spacing={3}>
               <FormControl>
                 <FormLabel>ID</FormLabel>
-                <Input value={user?.email} isReadOnly />
+                <Input value={posts.username} isReadOnly />
               </FormControl>
               <FormControl>
                 <FormLabel>タイトル</FormLabel>
@@ -61,7 +80,7 @@ export const UserModal: FC<Props> = memo((props) => {
               </FormControl>
               <FormControl overflow="break-word">
                 <FormLabel>コメント</FormLabel>
-                <Textarea h={200} overflow="break-word">
+                <Textarea value="" h={200} overflow="break-word" readOnly>
                   アンレート @1 VC:discord アイアン〜シルバーくらいの方
                   初心者歓迎です！ 雑談しながら楽しくやりましょう #VALORANT募集
                 </Textarea>
