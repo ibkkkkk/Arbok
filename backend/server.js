@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config("./config/.env");
+require("dotenv").config("/.env");
 const PORT = process.env.PORT || 8000;
 const app = express();
 const path = require("path");
@@ -34,4 +34,4 @@ mongoose
     console.log(err);
   });
 
-app.listen(process.env.PORT || 8000, () => console.log(" "));
+app.listen(PORT || 8000, () => console.log(" "));
